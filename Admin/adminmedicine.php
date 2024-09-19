@@ -1,10 +1,13 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="formdesign.css">
-    <title>Medicine Form</title>
+    <link rel="stylesheet" href="../css/formdesign.css">
+
+    <title>Medicine Form and List</title>
 </head>
 <body>
 
@@ -47,6 +50,54 @@
             </form>
         </div>
     </div>
+    <?php
+    // DATA BASE CONNECTION PARAMETERS
+    $servername= "localhost";
+    $unmae= "root";
+    $password = "";
+
+    $db_name = "ths_healthcare";
+
+    $conn = mysqli_connect($servername, $unmae, $password, $db_name);
+
+    if (!$conn) {
+	    echo "Connection failed!";
+    }   
+    ?>
+    
+    <!-- Medicine Table List -->
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <h2>Medicine List</h2>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Medicine Id</th>
+                        <th>Medicine Name</th>
+                        <th>Quantity</th>
+                        <th>Date Manufactured</th>
+                        <th>Expiration Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                       <td>
+
+                       </td>
+                            <button class="btn btn-success" onclick="window.location.href='edit_medicine.php?id=001'">Edit</button>
+                            <button class="btn btn-danger" onclick="window.location.href='delete_medicine.php?id=001'">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- Additional rows populated dynamically from the database -->
+                </tbody>
+            </table>
+
+         
+        </div>
+    </div>
+
 </div>
 
 </body>
