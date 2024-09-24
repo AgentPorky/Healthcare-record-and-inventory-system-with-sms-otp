@@ -1,17 +1,9 @@
 <?php
-// Database connection parameters
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ths_healthcare";
+ 
+include "db_conn.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+
 
 // Get data from POST request
 $medicine_id = $_POST['medicine_id'];
@@ -26,7 +18,7 @@ if (empty($medicine_id) || empty($medicine_name) || empty($medicine_quantity) ||
 }
 
 // Prepare the SQL query to check if the medicine already exists
-$selectSql = "SELECT * FROM medicine WHERE medicine_name = ?";
+$selectSql = "SELECT * FROM admin_medicine_inventory WHERE medicine_name = ?";
 $stmt = $conn->prepare($selectSql);
 
 if ($stmt === false) {
@@ -45,7 +37,7 @@ $result = $stmt->get_result();
 // Check if the medicine already exists
 if ($result->num_rows > 0) {
     // Medicine exists, so update the quantity
-    $updateSql = "UPDATE medicine SET medicine_quantity = medicine_quantity + ? WHERE medicine_name = ?";
+    $updateSql = "UPDATE admin_medicine_inventory SET medicine_quantity = medicine_quantity + ? WHERE medicine_name = ?";
     $stmt = $conn->prepare($updateSql);
 
     if ($stmt === false) {
@@ -56,7 +48,7 @@ if ($result->num_rows > 0) {
     $stmt->bind_param("is", $medicine_quantity, $medicine_name);
 } else {
     // Medicine does not exist, so insert new record
-    $insertSql = "INSERT INTO medicine (medicine_id, medicine_name, medicine_quantity, date_manufactured, expiration_date) VALUES (?, ?, ?, ?, ?)";
+    $insertSql = "INSERT INTO admin_medicine_inventory (medicine_id, medicine_name, medicine_quantity, date_manufactured, expiration_date) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($insertSql);
 
     if ($stmt === false) {
@@ -71,7 +63,7 @@ if ($result->num_rows > 0) {
 if ($stmt->execute()) {
     echo "Record processed successfully.";
     header("Location: adminmedicine.php");
-    die();
+    exit(); // Use exit after header redirection
 } else {
     echo "Error executing statement: " . $stmt->error;
 }

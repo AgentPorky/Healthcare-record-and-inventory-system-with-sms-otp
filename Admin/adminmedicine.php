@@ -1,12 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formdesign.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Medicine Form and List</title>
 </head>
 <body>
@@ -50,27 +48,33 @@
             </form>
         </div>
     </div>
-    <?php
-    // DATA BASE CONNECTION PARAMETERS
-    $servername= "localhost";
-    $unmae= "root";
-    $password = "";
 
+    <?php
+    // DATABASE CONNECTION PARAMETERS
+    $servername = "localhost";
+    $username = "root"; // Note: Change to your database username
+    $password = "";     // Note: Change to your database password
     $db_name = "ths_healthcare";
 
-    $conn = mysqli_connect($servername, $unmae, $password, $db_name);
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $db_name);
 
+    // Check connection
     if (!$conn) {
-	    echo "Connection failed!";
-    }   
-    ?>
-    
-    <!-- Medicine Table List -->
-    <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-            <h2>Medicine List</h2>
+        echo "Connection failed!";
+        exit();
+    }
 
-            <table class="table table-bordered">
+    // Query to select data from the table
+    $sql = "SELECT * FROM admin_medicine_inventory";
+    $result = $conn->query($sql);
+    ?>
+   
+    <!-- Medicine Table List -->
+    <?php
+    // Check if there are results and display them
+    if ($result->num_rows > 0) {
+        echo "<table class='table table-bordered'>
                 <thead>
                     <tr>
                         <th>Medicine Id</th>
@@ -81,23 +85,30 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                       <td>
+                <tbody>";
+        
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>" . $row['medicine_id'] . "</td>
+                    <td>" . $row['medicine_name'] . "</td>
+                    <td>" . $row['medicine_quantity'] . "</td>
+                    <td>" . $row['date_manufactured'] . "</td>
+                    <td>" . $row['expiration_date'] . "</td>
+                    <td>
+                        <button class='btn btn-success' onclick=\"window.location.href='editmedicineinv.php?medicineId=" . $row['medicine_id'] . "'\">Edit</button>
+                        <button class='btn btn-danger' onclick=\"window.location.href='deletemedicineinv.php?id=" . $row['medicine_id'] . "'\">Delete</button>
+                    </td>
+                </tr>";
+        }
+        
+        echo "</tbody></table>";
+    } else {
+        echo "<div class='alert alert-warning'>No records found.</div>";
+    }
 
-                       </td>
-                            <button class="btn btn-success" onclick="window.location.href='edit_medicine.php?id=001'">Edit</button>
-                            <button class="btn btn-danger" onclick="window.location.href='delete_medicine.php?id=001'">Delete</button>
-                        </td>
-                    </tr>
-                    <!-- Additional rows populated dynamically from the database -->
-                </tbody>
-            </table>
-
-         
-        </div>
-    </div>
-
+    // Close the database connection
+    $conn->close();
+    ?>
 </div>
 
 </body>

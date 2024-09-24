@@ -1,13 +1,19 @@
 <?php
 
-$servername= "localhost";
-$unmae= "root";
+$servername = "localhost";
+$uname = "root";  // Corrected variable name
 $password = "";
 
 $db_name = "ths_healthcare";
 
-$conn = mysqli_connect($servername, $unmae, $password, $db_name);
+// Establishing the connection
+$conn = mysqli_connect($servername, $uname, $password, $db_name);
 
+// Checking the connection
 if (!$conn) {
-	echo "Connection failed!";
+    die("Connection failed: " . mysqli_connect_error());
+} else {
+    echo "Connected successfully!";
 }
+?>
+

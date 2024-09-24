@@ -24,25 +24,25 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		// hashing the password
         $pass = md5($pass);
 
-        
-		$sql = "SELECT * FROM users WHERE user_name='$uname' AND password='$pass'";
+        //TABLE OF ADMIN REGISTER
+		$sql = "SELECT * FROM admin_register WHERE admin_username ='$uname' AND admin_password='$pass'";
 
 		$result = mysqli_query($conn, $sql);
 
 		if (mysqli_num_rows($result) === 1) {
 			$row = mysqli_fetch_assoc($result);
-            if ($row['user_name'] === $uname && $row['password'] === $pass) {
-            	$_SESSION['user_name'] = $row['user_name'];
-            	$_SESSION['name'] = $row['name'];
-            	$_SESSION['id'] = $row['id'];
+            if ($row['admin_username'] === $uname && $row['admin_password'] === $pass) {
+            	$_SESSION['admin_username'] = $row['admin_username'];
+            	$_SESSION['admin_name'] = $row['admin_name'];
+            	$_SESSION['admin_id'] = $row['admin_id'];
             	header("Location: adminhomepage.php");
 		        exit();
             }else{
-				header("Location: adminindex.php?error=Incorect User name or password");
+				header("Location: adminindex.php?error=Incorect Username or password");
 		        exit();
 			}
 		}else{
-			header("Location: adminindex.php?error=Incorect User name or password");
+			header("Location: adminindex.php?error=Incorect Username or password");
 	        exit();
 		}
 	}
