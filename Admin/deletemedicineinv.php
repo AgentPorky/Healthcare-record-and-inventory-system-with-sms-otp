@@ -1,17 +1,7 @@
 <?php
-// DATABASE CONNECTION PARAMETERS
-$servername = "localhost";
-$username = "root"; 
-$password = "";    
-$db_name = "ths_healthcare";
+// DATABASE CONNECTION !!
+require 'db_conn.php';
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $db_name);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 // Check if the ID is passed via the URL
 if (isset($_GET['id'])) {

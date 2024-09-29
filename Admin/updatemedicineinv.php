@@ -1,17 +1,6 @@
 <?php
-// DATABASE CONNECTION PARAMETERS
-$servername = "localhost";
-$username = "root"; // Note: Change to your database username
-$password = "";     // Note: Change to your database password
-$db_name = "ths_healthcare";
+require 'db_conn.php';
 
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $db_name);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
 
 // Check if the form is submitted with all required data
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

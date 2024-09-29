@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-offset-4 col-md-4">
             <form class="form" action="adminmedicine_process.php" method="post">
-                <h2>Medicine</h2>
+               <h1>ADD MEDICINE HERE</h1>
 
                 <div class="form-group">
                     <label for="medicine_id">Medicine Id:</label>
@@ -50,16 +50,9 @@
     </div>
 
     <?php
-    // DATABASE CONNECTION PARAMETERS
-    $servername = "localhost";
-    $username = "root"; // Note: Change to your database username
-    $password = "";     // Note: Change to your database password
-    $db_name = "ths_healthcare";
-
-    // Create connection
-    $conn = mysqli_connect($servername, $username, $password, $db_name);
-
-    // Check connection
+    
+    require 'db_conn.php';
+    
     if (!$conn) {
         echo "Connection failed!";
         exit();

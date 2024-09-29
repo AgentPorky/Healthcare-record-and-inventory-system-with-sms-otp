@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212; /* Deep black background */
+    background-color: 481E14; /* Deep black background */
     color: #fff; /* White text for contrast */
     margin: 0;
     display: flex;
@@ -69,7 +69,7 @@ nav ul li a:hover {
     margin-left: 250px;
     padding: 40px;
     flex-grow: 1;
-    background-color: #181818; /* Dark grey for content area */
+    background-color: grey; /* Dark grey for content area */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
