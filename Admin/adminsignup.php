@@ -7,7 +7,7 @@
 </head>
 <body>
      <form action="adminsignup-check.php" method="post">
-     	<h2>SIGN UP</h2>
+     	<h2> SIGN UP AS USER_PATIENT</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>
@@ -17,27 +17,27 @@
           <?php } ?>
 
           <label>Name</label>
-          <?php if (isset($_GET['userpatient_name'])) { ?>
+          <?php if (isset($_GET['name'])) { ?>
                <input type="text" 
-                      name="userpatient_name" 
+                      name="name" 
                       placeholder="Name"
-                      value="<?php echo $_GET['userpatient_name']; ?>"><br>
+                      value="<?php echo $_GET['name']; ?>"><br>
           <?php }else{ ?>
                <input type="text" 
-                      name="userpatient_name" 
+                      name="name" 
                       placeholder="Name"><br>
           <?php }?>
 
           <label>User Name</label>
-          <?php if (isset($_GET['userpatient_password'])) { ?>
+          <?php if (isset($_GET['uname'])) { ?>
                <input type="text" 
-                      name="userpatient_password" 
+                      name="uname" 
                       placeholder="User Name"
-                      value="<?php echo $_GET['userpatient_password']; ?>"><br>
+                      value="<?php echo $_GET['uname']; ?>"><br>
           <?php }else{ ?>
                <input type="text" 
-                      name="userpatient_password" 
-                      placeholder="UserName"><br>
+                      name="uname" 
+                      placeholder="User Name"><br>
           <?php }?>
 
 

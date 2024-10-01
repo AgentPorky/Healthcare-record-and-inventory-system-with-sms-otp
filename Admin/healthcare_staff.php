@@ -3,13 +3,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title>ADMIN_PATIENT_RECORD</title>
+    <title>HEALTHCARE_STAFF</title>
 </head>
 <body>
     <?php
-
     require 'db_conn.php';
-
     // Check connection
     if (!$conn) {
         echo "Connection failed!";
@@ -17,7 +15,7 @@
     }
 
     // Query to select data from the table
-    $sql = "SELECT * FROM adminpatient_record";
+    $sql = "SELECT * FROM admin_healthcare_unit";
     $result = $conn->query($sql);
     ?>
    
@@ -28,22 +26,19 @@
         echo "<table class='table table-bordered'>
                 <thead>
                     <tr>
-                        <th>Patient ID</th>
-                        <th>Name</th>
-                        <th>Age</th>
-                        <th>Gender</th>
-                        <th>Birthdate</th>
-                        <th>address</th>
+                        <th>Healthcare ID</th>
+                        <th>Healthcare staff name</th>
+                        <th>Position of staff</th>
+                        <th>Address</th>
                     </tr>
                 </thead>
                 <tbody>";
         
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>" . $row['patient_id'] . "</td>
-                    <td>" . $row['patient_name'] . "</td>
-                    <td>" . $row['age'] . "</td>
-                    <td>" . $row['gender'] . "</td>
+                    <td>" . $row['healthcare_id'] . "</td>
+                    <td>" . $row['healthcarestaff_name'] . "</td>
+                    <td>" . $row['position_of_staff'] . "</td>
                     <td>" . $row['address'] . "</td>
                     <td>
                         <button class='btn btn-success' onclick=\"window.location.href=''>Edit</button>
