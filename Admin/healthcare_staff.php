@@ -6,6 +6,38 @@
     <title>HEALTHCARE_STAFF</title>
 </head>
 <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-7">
+                <form class="form" action="adminpatientrec_process.php" method="post">
+                    <h1>ADD_HEALTHCARE_STAFF</h1>
+                    <div class="form-group">
+                        <label for="healthcare_id">Health ID:</label>
+                        <input type="text" class="form-control" id="healthcare_id" name="healthcare_id" placeholder="Enter Healthcare ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="healthcarestaff_name">Healthcare Staff Name:</label>
+                        <input type="text" class="form-control" id="healthcarestaff_name" name="healthcarestaff_name" placeholder="Input Staff name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="position_of_staff">Position of staff:</label>
+                        <input type="text" class="form-control" id="position_of_staff" name="position_of_staff" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">SAVE</button>
+                        <button type="reset" class="btn btn-info">RESET</button>
+                        <button type="button" onclick="window.location.href='adminhomepage.php'" class="btn btn-warning">MENU</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     <?php
     require 'db_conn.php';
     // Check connection

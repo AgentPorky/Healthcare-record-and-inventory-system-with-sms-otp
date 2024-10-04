@@ -15,8 +15,8 @@
         <li><a href="adminmedicine.php">Medicine Inventory</a></li>
         <li><a href="healthcare_staff.php">Healthcare Staff</a></li>
         <li><a href="adminpatientrec.php">Patient Record</a></li>
-        <li><a href="">Medical Record</a></li>
-        <li><a href="">Activity Log</a></li>
+        <li><a href="adminmedical_record.php">Medical Record</a></li>
+     
 
         <li><a href="adminlogin.php">Logout</a></li>
 

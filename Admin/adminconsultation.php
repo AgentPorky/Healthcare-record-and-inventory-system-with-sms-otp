@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-offset-3 col-md-7">
-            <form class="form" method="post" action="5consultation_process.php" id="myForm">
+            <form class="form" method="post" action="adminconsultation_process.php" id="myForm">
                 <h1>ADD CONSULTATION HERE</h1>
 
                 <div class="form-group">
@@ -64,7 +64,9 @@
                 <div class="form-group text-center">
                     <button type="submit" class="btn btn-primary">SAVE</button>
                     <button type="reset" class="btn btn-info" style="margin-left: 10px;">RESET</button>
-                    <button type="button" onclick="window.location.href='menu.php'" class="btn btn-warning" style="margin-left: 10px;">MENU</button>
+                    <button type="button" onclick="window.location.href='adminhomepage.php'" class="btn btn-warning" style="margin-left: 10px;">MENU</button>
+                    <br><br>
+                    <button type="button" onclick="window.location.href='adminmedicine.php'" class="btn btn-danger" style="margin-left: 10px;">CHECK AVAILABLE MEDICINE</button>
                 </div>
             </form>
         </div>

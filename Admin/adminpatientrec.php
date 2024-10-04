@@ -6,10 +6,54 @@
     <title>ADMIN_PATIENT_RECORD</title>
 </head>
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-offset-3 col-md-7">
+            <form class="form" action="adminpatientrec_process.php" method="post">
+               <h1>ADD PATIENT HERE</h1>
+
+                <div class="form-group">
+                    <label for="patient_id">Patient ID:</label>
+                    <input type="number" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="patient_name">Patient Name:</label>
+                    <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Patient Gender" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">Birthday:</label>
+                    <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">SAVE</button>
+                    <button type="reset" class="btn btn-info">RESET</button>
+                    <button type="button" onclick="window.location.href='adminhomepage.php'" class="btn btn-warning">MENU</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <?php
 
     require 'db_conn.php';
-
     // Check connection
     if (!$conn) {
         echo "Connection failed!";
@@ -21,7 +65,8 @@
     $result = $conn->query($sql);
     ?>
    
-    <!-- Medicine Table List -->
+    <!-- Responsive Table List -->
+    <div class="table-responsive">
     <?php
     // Check if there are results and display them
     if ($result->num_rows > 0) {
@@ -32,8 +77,9 @@
                         <th>Name</th>
                         <th>Age</th>
                         <th>Gender</th>
-                        <th>Birthdate</th>
-                        <th>address</th>
+                        <th>Birthday</th>
+                        <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -44,12 +90,13 @@
                     <td>" . $row['patient_name'] . "</td>
                     <td>" . $row['age'] . "</td>
                     <td>" . $row['gender'] . "</td>
+                    <td>" . $row['birthdate'] . "</td>
                     <td>" . $row['address'] . "</td>
-                    <td>
-                        <button class='btn btn-success' onclick=\"window.location.href=''>Edit</button>
-                        <button class='btn btn-danger' onclick=\"window.location.href=''>Delete</button>
+                    <td class='btn-container'>
+                        <button class='btn btn-success' onclick=\"window.location.href='edit.php?id=" . $row['patient_id'] . "'\">Edit</button>
+                        <button class='btn btn-danger' onclick=\"window.location.href='delete.php?id=" . $row['patient_id'] . "'\">Delete</button>
                     </td>
-                </tr>";
+                  </tr>";
         }
         
         echo "</tbody></table>";
@@ -60,5 +107,7 @@
     // Close the database connection
     $conn->close();
     ?>
-    </body>
+    </div> <!-- End of Responsive Table -->
+</div>
+</body>
 </html>

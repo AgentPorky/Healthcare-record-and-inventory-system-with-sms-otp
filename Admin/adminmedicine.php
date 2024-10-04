@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/formdesign.css">
+    <!-- Link the external table style CSS -->
+    <link rel="stylesheet" href="../css/tableStyle.css">
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <title>Medicine Form and List</title>
 </head>
@@ -11,7 +14,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-offset-4 col-md-4">
+        <div class="col-md-offset-3 col-md-7">
             <form class="form" action="adminmedicine_process.php" method="post">
                <h1>ADD MEDICINE HERE</h1>
 
@@ -44,6 +47,8 @@
                     <button type="submit" class="btn btn-primary">SAVE</button>
                     <button type="reset" class="btn btn-info">RESET</button>
                     <button type="button" onclick="window.location.href='adminhomepage.php'" class="btn btn-warning">MENU</button>
+                    <br><br>
+                    <button type="button" onclick="window.location.href='adminconsultation.php'" class="btn btn-danger"> CONSULTATION</button>
                 </div>
             </form>
         </div>
@@ -64,10 +69,11 @@
     ?>
    
     <!-- Medicine Table List -->
+    <div class="table-container">
     <?php
     // Check if there are results and display them
     if ($result->num_rows > 0) {
-        echo "<table class='table table-bordered'>
+        echo "<table class='table table-striped table-hover table-bordered'>
                 <thead>
                     <tr>
                         <th>Medicine Id</th>
@@ -87,7 +93,7 @@
                     <td>" . $row['medicine_quantity'] . "</td>
                     <td>" . $row['date_manufactured'] . "</td>
                     <td>" . $row['expiration_date'] . "</td>
-                    <td>
+                    <td class='btn-container'>
                         <button class='btn btn-success' onclick=\"window.location.href='editmedicineinv.php?medicineId=" . $row['medicine_id'] . "'\">Edit</button>
                         <button class='btn btn-danger' onclick=\"window.location.href='deletemedicineinv.php?id=" . $row['medicine_id'] . "'\">Delete</button>
                     </td>
@@ -102,7 +108,12 @@
     // Close the database connection
     $conn->close();
     ?>
+    </div>
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
