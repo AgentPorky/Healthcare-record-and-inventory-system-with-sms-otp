@@ -69,7 +69,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">UPDATE</button>
-                    <button type="button" onclick="window.location.href='updatemedicineinv.php'" class="btn btn-warning">CANCEL</button>
+                    <button type="button" onclick="window.location.href='adminmedicine.php'" class="btn btn-warning">CANCEL</button>
                 </div>
             </form>
         </div>

@@ -25,7 +25,7 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-<div class="container table-container">
+<div class="container table-container ">
     <?php
     // Check if there are results and display them
     if ($result->num_rows > 0) {

@@ -17,7 +17,7 @@ if ($conn->query($sql) === TRUE) {
     echo '
         <script type = "text/javascript">
             alert("Saved Record");
-            window.location = "7healthcare.php";
+            window.location = "adminpatientrec.php";
         </script>
     ';
 } else {

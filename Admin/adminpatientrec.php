@@ -14,7 +14,7 @@
 
                 <div class="form-group">
                     <label for="patient_id">Patient ID:</label>
-                    <input type="number" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
+                    <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
                 </div>
 
                 <div class="form-group">

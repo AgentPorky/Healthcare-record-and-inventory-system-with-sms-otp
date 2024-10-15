@@ -9,11 +9,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-3 col-md-7">
-                <form class="form" action="adminpatientrec_process.php" method="post">
+                <form class="form" action="healthcare_staff_process.php" method="post">
                     <h1>ADD_HEALTHCARE_STAFF</h1>
                     <div class="form-group">
                         <label for="healthcare_id">Health ID:</label>
-                        <input type="text" class="form-control" id="healthcare_id" name="healthcare_id" placeholder="Enter Healthcare ID" required>
+                        <input type="text" class="form-control" id="healthcare_id" name="health_id" placeholder="Enter Healthcare ID" required>
                     </div>
                     <div class="form-group">
                         <label for="healthcarestaff_name">Healthcare Staff Name:</label>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                         <label for="position_of_staff">Position of staff:</label>
-                        <input type="text" class="form-control" id="position_of_staff" name="position_of_staff" required>
+                        <input type="text" class="form-control" id="position_of_staff" name="position_of_staff" placeholder="Position of the staff" required>
                     </div>
                     
                     <div class="form-group">
@@ -55,13 +55,14 @@
     <?php
     // Check if there are results and display them
     if ($result->num_rows > 0) {
-        echo "<table class='table table-bordered'>
+        echo "<table class='table table-bordered table-sm' style='max-width: 100%;'>
                 <thead>
                     <tr>
                         <th>Healthcare ID</th>
-                        <th>Healthcare staff name</th>
-                        <th>Position of staff</th>
+                        <th>Healthcare Staff Name</th>
+                        <th>Position of Staff</th>
                         <th>Address</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -73,8 +74,9 @@
                     <td>" . $row['position_of_staff'] . "</td>
                     <td>" . $row['address'] . "</td>
                     <td>
-                        <button class='btn btn-success' onclick=\"window.location.href=''>Edit</button>
-                        <button class='btn btn-danger' onclick=\"window.location.href=''>Delete</button>
+                        <button class='btn btn-success btn-xs' onclick=\"window.location.href='edithealthcarestaff.php?id=" . $row['healthcare_id'] . "'\">Edit</button>
+                        <button class='btn btn-danger btn-xs' onclick=\"window.location.href='deletehealthcarestaff.php?healthcare_id=" . $row['healthcare_id'] . "'\">Delete</button>
+
                     </td>
                 </tr>";
         }
