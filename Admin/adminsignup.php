@@ -7,7 +7,7 @@
 </head>
 <body>
      <form action="adminsignup-check.php" method="post">
-     	<h2> SIGN UP AS USER_PATIENT</h2>
+     	<h2> SIGN UP AS ADMIN_USER</h2>
      	<?php if (isset($_GET['error'])) { ?>
      		<p class="error"><?php echo $_GET['error']; ?></p>
      	<?php } ?>

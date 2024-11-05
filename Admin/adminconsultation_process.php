@@ -51,7 +51,12 @@ if ($resultMedicine && $resultMedicine->num_rows > 0) {
       }
    } else {
       // Not enough medicines in stock
-      echo "Error: Not enough medicines in stock.";
+      echo '
+      <script type="text/javascript">
+         alert("Error: Not enough medicines in stock.");
+         window.location = "adminmedicine.php"; 
+      </script>
+   ';
       exit();
    }
 } else {
