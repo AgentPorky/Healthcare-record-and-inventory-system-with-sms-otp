@@ -194,41 +194,41 @@ table th {
 }
 
 /* Table Body Styling */
-/* Table styling for responsive design */
-table {
-    font-size: 10px; /* Adjust font size for smaller screens */
-    width: 100%; /* Full width on small screens */
-    max-width: 90%; /* Set a maximum width to make it appear wider but within the viewport */
-    margin: auto; /* Center the table within its container */
-}
-
-table th, table td {
-    padding: 8px 10px; /* Increase padding for better readability */
-}
-
-/* Stack table rows vertically on smaller screens */
-table, thead, tbody, th, td, tr {
-    display: block;
-}
-
-table tr {
-    margin-bottom: 10px;
-}
-
-table th {
-    background-color: #f1f1f1;
-    color: #333;
-    font-weight: bold;
-}
-
 table td {
-    padding-left: 45%; /* Adjust width of label padding for wider appearance */
-    position: relative;
+    padding: 10px; /* Padding inside table cells */
+    color: #333; /* Darker text for readability */
+    border-bottom: 1px solid #ddd; /* Light border between rows */
+    text-align: left; /* Left-align text in cells */
 }
 
-table td::before {
-    content: attr(data-label); /* Add data-label for responsive layout */
-    position: absolute;
-    left: 10px;
-    font-weight: bold;
+/* Zebra Striping for Rows */
+table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light background color for even rows */
 }
+
+/* Hover Effect for Rows */
+table tr:hover {
+    background-color:  slategray; /* Slightly darker color on hover */
+}
+
+/* Scrollbar Styling */
+.table-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #4CAF50; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Rounded edges for the scrollbar thumb */
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background-color: #367d3b; /* Darker color on hover */
+}
+
+/* Firefox scrollbar support */
+.table-container {
+    scrollbar-width: thin;
+    scrollbar-color: #4CAF50 #e0e0e0;
+}
+
+

@@ -2,57 +2,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS for styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap JavaScript bundle for modal and other components -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script For toggleAll in the table -->
+    
+    <!-- Custom CSS file for additional styles -->
+    <link rel="stylesheet" href="../Css/patientrecordstyles.css">
+
     <title>ADMIN_PATIENT_RECORD</title>
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-3 col-md-7">
-            <form class="form" action="adminpatientrec_process.php" method="post">
-               <h1>ADD PATIENT HERE</h1>
+<body class="body">
+    <!-- Sidebar for navigation links -->
+    <aside>
+        <div id="sidenav" class="col-2">
+                <li class="nav-item">
+                    <a href="adminconsultation.php" class="nav-link">
+                        <i class="fa-solid fa-hospital me-2"></i>
+                        <span class="d-none d-sm-inline text-white">DASHBOARD</span>
+                    </a>
+                </li>
+                <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+                <!-- Each list item represents a link to a different page -->
+                <li class="nav-item">
+                    <a href="adminconsultation.php" class="nav-link">
+                        <i class="fa-solid fa-stethoscope me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Consultation</span>
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="adminmedicine.php" class="nav-link">
+                        <i class="fa-solid fa-pills me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Medicine Inventory</span>
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="healthcare_staff.php" class="nav-link">
+                        <i class="fa-solid fa-user-nurse me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Healthcare Staff</span>
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="adminpatientrec.php" class="nav-link">
+                        <i class="fa-solid fa-user me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Patient Record</span>
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-chart-line me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Report</span>
+                    </a>
+                 <hr>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-history me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Activity Log</span>
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a href="adminlogin.php" class="nav-link">
+                        <i class="fa-solid fa-sign-out-alt me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Log Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
 
-                <div class="form-group">
-                    <label for="patient_id">Patient ID:</label>
-                    <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
-                </div>
+    <!-- Header Navigation Bar -->
+    <header>
+        <nav class="navbar navbar-expand-sm" > <!-- Offset for sidebar -->
+            <div class="logo-text-container">
+                <img src="../Photos/logo.png" alt="Healthcare Logo" class="logo">
+                <p class="logo-text text-white h3">Panghiawan Barangay Healthcare</p>
+            </div>
+        </nav>
+    </header>
 
-                <div class="form-group">
-                    <label for="patient_name">Patient Name:</label>
-                    <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
-                </div>
+<!-- The Modal -->
+<div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPatientModalLabel">Add Patient Here</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="adminpatientrec_process.php" method="post">
+                    <div class="mb-3">
+                        <label for="patient_id" class="form-label">Patient ID:</label>
+                        <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="patient_name" class="form-label">Patient Name:</label>
+                        <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Patient Gender" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="age" class="form-label">Age:</label>
+                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age" required>
+                    </div>
 
-                <div class="form-group">
-                    <label for="birthdate">Birthday:</label>
-                    <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
-                </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender:</label>
+                        <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Patient Gender" required>
+                    </div>
 
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">SAVE</button>
-                    <button type="reset" class="btn btn-info">RESET</button>
-                    <button type="button" onclick="window.location.href='adminhomepage.php'" class="btn btn-warning">MENU</button>
-                </div>
-            </form>
+                    <div class="mb-3">
+                        <label for="birthdate" class="form-label">Birthday:</label>
+                        <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" form="patientForm" class="btn btn-primary">SAVE</button>
+                <button type="reset" form="patientForm" class="btn btn-info">RESET</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
+</div>
 
+    <main>
+    <div class="container col-10 bg-light">
+        <h3>Add Patient Record</h3>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPatientModal">
+            Add Patient
+        </button>
+    </div>
     <?php
-
     require 'db_conn.php';
     // Check connection
     if (!$conn) {
@@ -93,8 +192,8 @@
                     <td>" . $row['birthdate'] . "</td>
                     <td>" . $row['address'] . "</td>
                     <td class='btn-container'>
-                        <button class='btn btn-success' onclick=\"window.location.href='edit.php?id=" . $row['patient_id'] . "'\">Edit</button>
-                        <button class='btn btn-danger' onclick=\"window.location.href='delete.php?id=" . $row['patient_id'] . "'\">Delete</button>
+                        <button class='btn btn-success' onclick=\"window.location.href='editpatientrec.php?id=" . $row['patient_id'] . "'\">Edit</button>
+                        <button class='btn btn-danger' onclick=\"window.location.href='deletepatientrec.php?id=" . $row['patient_id'] . "'\">Delete</button>
                     </td>
                   </tr>";
         }
@@ -108,6 +207,8 @@
     $conn->close();
     ?>
     </div> <!-- End of Responsive Table -->
-</div>
+    
+    </main>
+
 </body>
 </html>

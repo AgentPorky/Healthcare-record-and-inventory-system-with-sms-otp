@@ -7,17 +7,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="../Css/adminhomepagestyles.css">
+    <!-- NOTE! I PURPOSELY PUT ANOTHER CSS STYLES BECAUSE THERE ARE SOME STYLES THAT DOESNT WORK IDK WHY ? BISAN PAREHAS ERROR JAPUN -->
+    
     <title>ADMIN_HOME_PAGE</title>
 
 </head>
 <body class="body">
-    <aside>
-        <!--SIDEBAR NAVIGATOR-->
+     <!-- Sidebar for navigation links -->
+     <aside>
         <div id="sidenav" class="col-2">
-            <i class="fa-solid fs-4 me-2"></i>
-            <span class="fs-4 text-white h4">DASHBOARD</span>
-            <hr class="text-white">
+                <li class="nav-item">
+                    <a href="adminhomepage.php" class="nav-link">
+                        <i class="fa-solid fa-hospital me-2"></i>
+                        <span class="d-none d-sm-inline text-white">DASHBOARD</span>
+                    </a>
+                </li>
+                <hr>
             <ul class="nav nav-pills flex-column mb-auto">
+                <!-- Each list item represents a link to a different page -->
                 <li class="nav-item">
                     <a href="adminconsultation.php" class="nav-link">
                         <i class="fa-solid fa-stethoscope me-2"></i>
@@ -47,54 +54,40 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a href="adminmedical_record.php" class="nav-link">
-                        <i class="fa-solid fa-file-medical me-2"></i>
-                        <span class="d-none d-sm-inline text-white">Medical Record</span>
+                    <a href="#" class="nav-link">
+                        <i class="fa-solid fa-chart-line me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Report</span>
                     </a>
+                 <hr>
                 </li>
-                <hr>
-                <li class="nav-item">
-                    <a href="adminlogin.php" class="nav-link">
-                        <i class="fa-solid fa-file-medical me-2"></i>
-                        <span class="d-none d-sm-inline text-white">LOG OUT</span>
-                    </a>
-                </li>
-                <hr>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="fa-solid fa-file-medical me-2"></i>
-                        <span class="d-none d-sm-inline text-white">ACTIVITY LOG</span>
+                        <i class="fa-solid fa-history me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Activity Log</span>
                     </a>
-                <hr>
                 </li>
+                <hr>
                 <li class="nav-item">
                     <a href="adminlogin.php" class="nav-link">
-                        <i class="fa-solid fa-file-medical me-2"></i>
-                        <span class="d-none d-sm-inline text-white">REPORT</span>
+                        <i class="fa-solid fa-sign-out-alt me-2"></i>
+                        <span class="d-none d-sm-inline text-white">Log Out</span>
                     </a>
                 </li>
-                <hr>
             </ul>
         </div>
-        
     </aside>
-    <header>
-        <!--HEADER NAVIGATION BAR-->
-        <nav class="navbar navbar-expand-sm ">
-            <div class="container-fluid d-flex justify-content-center align-items-center">
-                <h5 class="text-white ">PANGHIAWAN BARANGAY HEALTHCARE</h5>
 
-                <!-- <ul class="navbar-nav mx-auto"> <!-- Use mx-auto for centering 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">ABOUT US</a>
-                    </li>
-                </ul> -->
+        <!-- HEADER NAV BAR -->
+    <header>
+        <nav class="navbar navbar-expand-sm" > <!-- Offset for sidebar -->
+            <div class="logo-text-container">
+                <img src="../Photos/logo.png" alt="Healthcare Logo" class="logo">
+                <p class="logo-text text-white h3">Panghiawan Barangay Healthcare</p>
             </div>
         </nav>
     </header>
+       
+
 
         <!--MAIN CONTENT OF THE HOME PAGE-->
     <main>

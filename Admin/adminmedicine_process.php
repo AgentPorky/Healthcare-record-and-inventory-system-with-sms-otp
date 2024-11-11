@@ -26,7 +26,7 @@ if ($stmt === false) {
 }
 
 // Bind parameters
-$stmt->bind_param("s", $medicine_name);
+$stmt->bind_param("s", $medicine_id);
 
 // Execute the statement
 $stmt->execute();
@@ -45,7 +45,7 @@ if ($result->num_rows > 0) {
     }
 
     // Bind parameters
-    $stmt->bind_param("is", $medicine_quantity, $medicine_name);
+    $stmt->bind_param("is", $medicine_quantity, $medicine_id);
 } else {
     // Medicine does not exist, so insert new record
     $insertSql = "INSERT INTO admin_medicine_inventory (medicine_id, medicine_name, medicine_quantity, date_manufactured, expiration_date) VALUES (?, ?, ?, ?, ?)";
