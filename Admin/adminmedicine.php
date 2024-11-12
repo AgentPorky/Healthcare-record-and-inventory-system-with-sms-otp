@@ -140,9 +140,14 @@
             <h3>ADD MEDICINE</h3>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Click to add medicine</button>
         </div>
+        <div class="table-responsive">
 
         <!-- Medicine Inventory Table -->
         <div class="table-container table-responsive text-center ">
+            <div class="table-responsive">
+                <div class="search-container">
+                    <input type="text" id="search-box" placeholder="Search..." class="search-box">
+                </div>
             <?php
             require 'db_conn.php';
 
@@ -158,7 +163,7 @@
                 echo "<table class='table table-striped table-hover table-bordered mx-auto' style='width: 80%;'>
                       <thead>
                             <tr>
-                               <th></th> 
+                               <th>Select</th> 
                                 <th>Medicine ID</th>
                                 <th>Medicine Name</th>
                                 <th>Quantity</th>

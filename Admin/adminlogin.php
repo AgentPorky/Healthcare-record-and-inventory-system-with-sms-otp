@@ -22,7 +22,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	    exit();
 	}else{
 		// hashing the password
-        $pass = md5($pass);
+     //   $pass = md5($pass);
 
         //TABLE OF ADMIN REGISTER
 		$sql = "SELECT * FROM admin_register WHERE admin_username ='$uname' AND admin_password='$pass'";

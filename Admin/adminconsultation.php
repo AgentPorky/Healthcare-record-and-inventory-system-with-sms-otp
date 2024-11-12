@@ -3,35 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Bootstrap CSS for styling -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS for basic styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome for icons used in the sidebar and other UI elements -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Bootstrap JavaScript bundle for modal and other components -->
+    <!-- Select2 CSS for searchable dropdown -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Bootstrap JavaScript bundle for handling modal popups and other components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Script For toggleAll in the table -->
-    
+
+    <!-- jQuery (required by Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Select2 JavaScript for searchable dropdowns -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+    <!-- Custom JavaScript file for additional functionality (e.g., setting IDs) -->
+    <script src="../Javascript/get_id.js"></script>
+    <script src="../Javascript/get_patient.js"></script>
+
     <!-- Custom CSS file for additional styles -->
     <link rel="stylesheet" href="../Css/adminconsultationstyles.css">
-    <title>TESTING_KIT_CONSULTATIONt</title>
+    <title>ADMIN_CONSULTATION</title>
 </head>
-<body>
 <body class="body">
     <!-- Sidebar for navigation links -->
     <aside>
         <div id="sidenav" class="col-2">
-                <li class="nav-item">
-                    <a href="adminhomepage.php" class="nav-link">
-                        <i class="fa-solid fa-hospital me-2"></i>
-                        <span class="d-none d-sm-inline text-white">DASHBOARD</span>
-                    </a>
-                </li>
-                <hr>
+            <li class="nav-item">
+                <a href="adminhomepage.php" class="nav-link">
+                    <i class="fa-solid fa-hospital me-2"></i>
+                    <span class="d-none d-sm-inline text-white">DASHBOARD</span>
+                </a>
+            </li>
+            <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-                <!-- Each list item represents a link to a different page -->
                 <li class="nav-item">
                     <a href="adminconsultation.php" class="nav-link">
                         <i class="fa-solid fa-stethoscope me-2"></i>
@@ -65,8 +74,8 @@
                         <i class="fa-solid fa-chart-line me-2"></i>
                         <span class="d-none d-sm-inline text-white">Report</span>
                     </a>
-                 <hr>
                 </li>
+                <hr>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="fa-solid fa-history me-2"></i>
@@ -84,9 +93,9 @@
         </div>
     </aside>
 
-    <!-- Header Navigation Bar -->
+    <!-- Header Navigation Bar for branding and additional navigation options -->
     <header>
-        <nav class="navbar navbar-expand-sm" > <!-- Offset for sidebar -->
+        <nav class="navbar navbar-expand-sm">
             <div class="logo-text-container">
                 <img src="../Photos/logo.png" alt="Healthcare Logo" class="logo">
                 <p class="logo-text text-white h3">Panghiawan Barangay Healthcare</p>
@@ -95,132 +104,159 @@
     </header>
 
     <main>
-            <!-- Button to Open the Consultation Modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addConsultationModal">
-        Add Consultation
-    </button>
+        <!-- Button to trigger the Consultation Modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addConsultationModal">
+            Add Consultation
+        </button>
 
-<!-- Add Consultation Modal -->
-<div class="modal fade" id="addConsultationModal" tabindex="-1" aria-labelledby="addConsultationModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addConsultationModalLabel">Add Consultation Here</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Consultation Form -->
-                <form id="consultationForm" method="post" action="adminconsultation_process.php">
-                    <div class="mb-3">
-                        <label for="consultationId" class="form-label">Consultation ID:</label>
-                        <input type="number" class="form-control" id="consultationId" name="consultation_id" placeholder="Enter Consultation ID" required>
+        <!-- Add Consultation Modal for adding new consultations -->
+        <div class="modal fade" id="addConsultationModal" tabindex="-1" aria-labelledby="addConsultationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addConsultationModalLabel">Add Consultation Here</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="healthcare_id" class="form-label">Health Staff ID:</label>
-                        <input type="text" class="form-control" id="healthcare_id" name="healthcare_id" placeholder="Enter Health Staff ID" required>
+                    <div class="modal-body">
+                        <!-- Consultation Form with input fields for consultation details -->
+                        <form id="consultationForm" method="post" action="adminconsultation_process.php">
+                            <div class="mb-3">
+                                <label for="consultationId" class="form-label">Consultation ID:</label>
+                                <input type="text" class="form-control" id="consultationId" name="consultation_id" placeholder="Enter Consultation ID" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="healthcare_id" class="form-label">Health Staff ID:</label>
+                                <input type="text" class="form-control" id="healthcare_id" name="healthcare_id" placeholder="Enter Health Staff ID" required>
+                            </div>
+                            <!-- Select2-enhanced Patient ID Dropdown -->
+                             <div class="mb-3">
+                                <label for="patient_id" class="form-label">Patient ID:</label>
+                                <select id="patient_id" name="patient_id" onchange="updatePatientName()" required>
+                                    <option value="" disabled selected>Select Patient</option>
+                                    <?php include 'get_patient_data.php'; ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="patient_name" class="form-label">Patient Name:</label>
+                                <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Patient Name" readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="medicine_id" class="form-label">Medicine ID:</label>
+                                <select id="medicine_id" name="medicine_id" onchange="updateMedicineName()" required>
+                                    <option value="" disabled selected>Select medicine</option>
+                                    <?php include 'get_medicine_select.php'; ?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="medicine_name" class="form-label">Medicine Name:</label>
+                                <input type="text" class="form-control" id="medicine_name" name="medicine_name" placeholder="Enter Medicine Name" readonly required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="quantity" class="form-label">Quantity:</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="time" class="form-label">Time:</label>
+                                <input type="time" class="form-control" id="time" name="time" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Date:</label>
+                                <input type="date" class="form-control" id="date" name="date" required>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="userpatient_id" class="form-label">Patient ID:</label>
-                        <input type="text" class="form-control" id="userpatient_id" name="userpatient_id" placeholder="Enter Patient ID" required>
+                    <div class="modal-footer">
+                        <button type="submit" form="consultationForm" class="btn btn-primary">Save</button>
+                        <button type="reset" form="consultationForm" class="btn btn-info">Reset</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="patient_name" class="form-label">Patient Name:</label>
-                        <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter Patient Name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="medicine_id" class="form-label">Medicine ID:</label>
-                        <input type="text" class="form-control" id="medicine_id" name="medicine_id" placeholder="Enter Medicine ID" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="medicine_name" class="form-label">Medicine Name:</label>
-                        <input type="text" class="form-control" id="medicine_name" name="medicine_name" placeholder="Enter Medicine Name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity:</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity" min="1" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="time" class="form-label">Time:</label>
-                        <input type="time" class="form-control" id="time" name="time" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date:</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" form="consultationForm" class="btn btn-primary">Save</button>
-                <button type="reset" form="consultationForm" class="btn btn-info">Reset</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<?php
 
-require 'db_conn.php';
+        <?php
+        require 'db_conn.php';
 
-if (!$conn) {
-    echo "Connection failed!";
-    exit();
-}
+        if (!$conn) {
+            echo "Connection failed!";
+            exit();
+        }
 
-// Query to select data from the table
-$sql = "SELECT * FROM medical_record";
-$result = $conn->query($sql);
-?>
+        // Query to select data from the table
+        $sql = "SELECT * FROM medical_record";
+        $result = $conn->query($sql);
+        ?>
 
-<div class="container table-container ">
-    <?php
-    // Check if there are results and display them
-        if ($result->num_rows > 0) 
-            echo "<table class='table table-striped table-hover table-bordered'>
-                    <thead>
-                        <tr>
-                            <th>Consultation ID</th>
-                            <th>Health ID</th>
-                            <th>Patient ID</th>
-                            <th>Patient Name</th>
-                            <th>Medicine ID</th>
-                            <th>Medicine Name</th>
-                            <th>Quantity</th>
-                            <th>Time</th>
-                            <th>Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>";
+        <div class="container table-container">
+            <?php
+            if ($result && $result->num_rows > 0) {
+                echo "<table class='table table-striped table-hover table-bordered'>
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Consultation ID</th>
+                                <th>Health ID</th>
+                                <th>Patient ID</th>
+                                <th>Patient Name</th>
+                                <th>Medicine ID</th>
+                                <th>Medicine Name</th>
+                                <th>Quantity</th>
+                                <th>Time</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+                
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td><input type='checkbox' class='row-checkbox'></td>
+                            <td>" . $row['consultation_id'] . "</td>
+                            <td>" . $row['healthcare_id'] . "</td>
+                            <td>" . $row['patient_id'] . "</td>
+                            <td>" . $row['patient_name'] . "</td>
+                            <td>" . $row['medicine_id'] . "</td>
+                            <td>" . $row['medicine_name'] . "</td>
+                            <td>" . $row['quantity'] . "</td>
+                            <td>" . $row['time_'] . "</td>
+                            <td>" . $row['date_'] . "</td>
+                            <td class='btn-container'>
+                                <button class='btn btn-success' onclick=\"window.location.href='editconsultation.php?consultationId=" . $row['consultation_id'] . "'\">Edit</button>
+                                <button class='btn btn-danger' onclick=\"window.location.href='?id=" . $row['consultation_id'] . "'\">Delete</button>
+                            </td>
+                        </tr>";
+                }
 
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td>" . $row['consultation_id'] . "</td>
-                        <td>" . $row['healthcare_id'] . "</td>
-                        <td>" . $row['patient_id'] . "</td>
-                        <td>" . $row['patient_name'] . "</td>
-                        <td>" . $row['medicine_id'] . "</td>
-                        <td>" . $row['medicine_name'] . "</td>
-                        <td>" . $row['quantity'] . "</td>
-                        <td>" . $row['time_'] . "</td>
-                        <td>" . $row['date_'] . "</td>
-                        <td class='btn-container'>
-                            <button class='btn btn-success' onclick=\"window.location.href='?medicineId=" . $row['medicine_id'] . "'\">Edit</button>
-                            <button class='btn btn-danger' onclick=\"window.location.href='?id=" . $row['medicine_id'] . "'\">Delete</button>
-                        </td>
-                    </tr>";
+                echo "</tbody></table>";
+            } else {
+                echo "<p>No records found.</p>";
             }
             ?>
-
+        </div>
     </main>
 
-    
+    <!-- Initialize Select2 for Patient ID dropdown with AJAX -->
+    <script>
+        $(document).ready(function() {
+            $('#patient_id').select2({
+                placeholder: "Select or search for a patient",
+                ajax: {
+                    url: 'get_patient_data.php', // PHP file to get patients' data
+                    dataType: 'json',
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    }
+                }
+            });
+
+            // Update patient name on selection
+            $('#patient_id').on('select2:select', function(e) {
+                const selectedData = e.params.data;
+                $('#patient_name').val(selectedData.text); // Autofill patient name
+            });
+        });
+    </script>
 </body>
 </html>

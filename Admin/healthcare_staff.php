@@ -135,9 +135,15 @@
     <div class="container col-10 bg-light">
             <h3>Add Healthcare Staff</h3>
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#myModal">Click to add medicine</button>
+            
         </div>
+
         <!-- Medicine Table List -->
-        <div class="table-container table-responsive text-center">
+        <div class="table-container table-responsive text-center">  
+            <div class="table-responsive">
+                <div class="search-container">
+                    <input type="text" id="search-box" placeholder="Search..." class="search-box">
+                </div>
             <?php
             require 'db_conn.php';
             // Check connection
@@ -155,6 +161,7 @@
                 echo "<table class='table table-bordered table-sm' style='max-width: 100%;'>
                         <thead>
                             <tr>
+                                <th>Select</th>
                                 <th>Healthcare ID</th>
                                 <th>Healthcare Staff Name</th>
                                 <th>Position of Staff</th>
@@ -166,6 +173,7 @@
                 
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>
+                            <td><input type='checkbox' class='row-checkbox'></td>
                             <td>" . $row['healthcare_id'] . "</td>
                             <td>" . $row['healthcarestaff_name'] . "</td>
                             <td>" . $row['position_of_staff'] . "</td>

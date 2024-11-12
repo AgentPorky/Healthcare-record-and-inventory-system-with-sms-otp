@@ -18,25 +18,25 @@
 
             // Check if the patient Rec parameter is set in the URL
             if (isset($_GET['patient_id'])) {
-                $medicineId = filter_var($_GET['medicineId'], FILTER_SANITIZE_NUMBER_INT);
+                $patientId = filter_var($_GET['patient_id'], FILTER_SANITIZE_NUMBER_INT);
 
-                // Fetch medicine details from the database
-                $sql = "SELECT * FROM admin_medicine_inventory WHERE medicine_id = ?";
+                // Fetch patient records details from the database
+                $sql = "SELECT * FROM adminpatient_record WHERE patient_id= ?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("i", $medicineId);
+                $stmt->bind_param("i", $patientId);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
                 if ($result->num_rows > 0) {
                     $userData = $result->fetch_assoc();
                 } else {
-                    echo "<div class='alert alert-danger'>Medicine not found.</div>";
+                    echo "<div class='alert alert-danger'>Patient not found.</div>";
                     exit();
                 }
 
                 $stmt->close();
             } else {
-                echo "<div class='alert alert-warning'>Medicine ID not provided.</div>";
+                echo "<div class='alert alert-warning'>Patient ID not provided.</div>";
                 exit();
             }
             ?>

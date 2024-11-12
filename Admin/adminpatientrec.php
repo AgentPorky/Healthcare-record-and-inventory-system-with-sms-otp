@@ -19,10 +19,11 @@
     <title>ADMIN_PATIENT_RECORD</title>
 </head>
 <body>
-<body class="body">
     <!-- Sidebar for navigation links -->
     <aside>
         <div id="sidenav" class="col-2">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <!-- Navigation Links -->
                 <li class="nav-item">
                     <a href="adminconsultation.php" class="nav-link">
                         <i class="fa-solid fa-hospital me-2"></i>
@@ -30,8 +31,6 @@
                     </a>
                 </li>
                 <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <!-- Each list item represents a link to a different page -->
                 <li class="nav-item">
                     <a href="adminconsultation.php" class="nav-link">
                         <i class="fa-solid fa-stethoscope me-2"></i>
@@ -86,7 +85,7 @@
 
     <!-- Header Navigation Bar -->
     <header>
-        <nav class="navbar navbar-expand-sm" > <!-- Offset for sidebar -->
+        <nav class="navbar navbar-expand-sm">
             <div class="logo-text-container">
                 <img src="../Photos/logo.png" alt="Healthcare Logo" class="logo">
                 <p class="logo-text text-white h3">Panghiawan Barangay Healthcare</p>
@@ -94,63 +93,72 @@
         </nav>
     </header>
 
-<!-- The Modal -->
-<div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addPatientModalLabel">Add Patient Here</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="adminpatientrec_process.php" method="post">
-                    <div class="mb-3">
-                        <label for="patient_id" class="form-label">Patient ID:</label>
-                        <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
-                    </div>
+    <!-- The Modal -->
+    <div class="modal fade" id="addPatientModal" tabindex="-1" aria-labelledby="addPatientModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addPatientModalLabel">Add Patient Here</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form element added -->
+                    <form id="patientForm" action="adminpatientrec_process.php" method="POST">
+                        <div class="mb-3">
+                            <label for="patient_id" class="form-label">Patient ID:</label>
+                            <input type="text" class="form-control" id="patient_id" name="patient_id" placeholder="Enter patient ID" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="patient_name" class="form-label">Patient Name:</label>
-                        <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="patient_name" class="form-label">Patient Name:</label>
+                            <input type="text" class="form-control" id="patient_name" name="patient_name" placeholder="Enter patient name" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="age" class="form-label">Age:</label>
-                        <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="age" class="form-label">Age:</label>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Enter Patient Age" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="gender" class="form-label">Gender:</label>
-                        <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Patient Gender" required>
-                    </div>
+                        <div class="mb-3">
+                            <label for="gender" class="form-label">Gender:</label>
+                            <input type="text" class="form-control" id="gender" name="gender" placeholder="Enter Patient Gender" required>
+                        </div>
 
-                    <div class="mb-3">
-                        <label for="birthdate" class="form-label">Birthday:</label>
-                        <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" form="patientForm" class="btn btn-primary">SAVE</button>
-                <button type="reset" form="patientForm" class="btn btn-info">RESET</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <div class="mb-3">
+                            <label for="birthdate" class="form-label">Birthday:</label>
+                            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address:</label>
+                            <input type="text" class="form-control" id="address" name="address" placeholder="Input Patient Address" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- Form Submit button -->
+                    <button type="submit" form="patientForm" class="btn btn-primary">SAVE</button>
+                    <button type="reset" form="patientForm" class="btn btn-info">RESET</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-    <main>
     <div class="container col-10 bg-light">
         <h3>Add Patient Record</h3>
         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addPatientModal">
             Add Patient
-        </button>
+        </button> <!-- Responsive Table List -->
+      <div class="table-responsive">
+        <div class="search-container">
+            <input type="text" id="search-box" placeholder="Search..." class="search-box">
+        </div>
+       
+    </main>
+
     </div>
+
     <?php
     require 'db_conn.php';
     // Check connection
@@ -165,13 +173,13 @@
     ?>
    
     <!-- Responsive Table List -->
-    <div class="table-responsive">
     <?php
     // Check if there are results and display them
     if ($result->num_rows > 0) {
         echo "<table class='table table-bordered'>
                 <thead>
                     <tr>
+                        <th>Select</th>
                         <th>Patient ID</th>
                         <th>Name</th>
                         <th>Age</th>
@@ -185,6 +193,7 @@
         
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
+                    <td><input type='checkbox' class='row-checkbox'></td>
                     <td>" . $row['patient_id'] . "</td>
                     <td>" . $row['patient_name'] . "</td>
                     <td>" . $row['age'] . "</td>
@@ -208,7 +217,6 @@
     ?>
     </div> <!-- End of Responsive Table -->
     
-    </main>
 
 </body>
 </html>

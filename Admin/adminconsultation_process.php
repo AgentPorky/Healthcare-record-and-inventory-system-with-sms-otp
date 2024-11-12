@@ -3,24 +3,50 @@
 require 'db_conn.php';
 
 if(!$conn){
-   echo 'Connection failed!';
-   exit();
+   die('Connection failed: ' . mysqli_connect_error()); // Show the exact error for debugging
 }
 
-// Get data from the form
-$consultation_id = $_POST['consultation_id'];
-$health_id = $_POST['healthcare_id'];
-$patient_id = $_POST['userpatient_id'];
-$patient_name = $_POST['patient_name'];
-$medicine_id = $_POST['medicine_id'];
-$medicine_name = $_POST['medicine_name'];
-$quantity = $_POST['quantity'];
-$time_ = $_POST['time'];
-$date_ = $_POST['date'];
+// Get data from the form using isset to avoid undefined index errors
+$consultation_id = isset($_POST['consultation_id']) ? $_POST['consultation_id'] : null;
+$health_id = isset($_POST['healthcare_id']) ? $_POST['healthcare_id'] : null;
+$patient_id = isset($_POST['patient_id']) ? $_POST['patient_id'] : null;
+$patient_name = isset($_POST['patient_name']) ? $_POST['patient_name'] : null;
+$medicine_id = isset($_POST['medicine_id']) ? $_POST['medicine_id'] : null;
+$medicine_name = isset($_POST['medicine_name']) ? $_POST['medicine_name'] : null;
+$quantity = isset($_POST['quantity']) ? $_POST['quantity'] : null;
+$time_ = isset($_POST['time']) ? $_POST['time'] : null;
+$date_ = isset($_POST['date']) ? $_POST['date'] : null;
+
+// Check if all fields are set
+if (!$consultation_id || !$health_id || !$patient_id || !$patient_name || !$medicine_id || !$medicine_name || !$quantity || !$time_ || !$date_) {
+    echo "Error: All fields are required.";
+    exit();
+}
+
+// Check if the consultation_id already exists
+$checkConsultationQuery = "SELECT consultation_id FROM medical_record WHERE consultation_id = ?";
+$stmtCheck = $conn->prepare($checkConsultationQuery);
+$stmtCheck->bind_param("i", $consultation_id);
+$stmtCheck->execute();
+$resultCheck = $stmtCheck->get_result();
+
+if ($resultCheck && $resultCheck->num_rows > 0) {
+    // Consultation ID already exists
+    echo '
+    <script type="text/javascript">
+        alert("Error: The consultation ID is already in use please provide another id.");
+        window.location = "adminmedical_record.php"; 
+    </script>
+    ';
+    exit();
+}
 
 // Check if the medicine exists in the medicine table
-$selectMedicineQuery = "SELECT medicine_quantity FROM admin_medicine_inventory WHERE medicine_name = '$medicine_name'";
-$resultMedicine = $conn->query($selectMedicineQuery);
+$selectMedicineQuery = "SELECT medicine_quantity FROM admin_medicine_inventory WHERE medicine_name = ?";
+$stmt = $conn->prepare($selectMedicineQuery);
+$stmt->bind_param("s", $medicine_name);
+$stmt->execute();
+$resultMedicine = $stmt->get_result();
 
 if ($resultMedicine && $resultMedicine->num_rows > 0) {
    // Medicine exists, proceed with subtraction and insertion
@@ -32,22 +58,30 @@ if ($resultMedicine && $resultMedicine->num_rows > 0) {
    // Check if there are enough medicines in stock
    if ($currentQuantity >= $quantity) {
       // Perform subtraction in the medicine table
-      $updateMedicineQuery = "UPDATE admin_medicine_inventory SET medicine_quantity = medicine_quantity - $quantity WHERE medicine_name = '$medicine_name'";
-      $conn->query($updateMedicineQuery);
+      $updateMedicineQuery = "UPDATE admin_medicine_inventory SET medicine_quantity = medicine_quantity - ? WHERE medicine_name = ?";
+      $stmtUpdate = $conn->prepare($updateMedicineQuery);
+      $stmtUpdate->bind_param("is", $quantity, $medicine_name);
+      $stmtUpdate->execute();
 
-      // Insert data into the consultation table
-      $insertConsultationQuery = "INSERT INTO medical_record (consultation_id, healthcare_id, patient_id, patient_name, medicine_id, medicine_name, quantity, time_, date_) 
-                                  VALUES ('$consultation_id', '$health_id', '$patient_id', '$patient_name', '$medicine_id', '$medicine_name', '$quantity', '$time_', '$date_')";
-
-      if ($conn->query($insertConsultationQuery) === TRUE) {
-         echo '
-            <script type="text/javascript">
-               alert("Saved Record");
-               window.location = "adminmedical_record.php"; 
-            </script>
-         ';
+      if ($stmtUpdate->affected_rows > 0) {
+         // Insert data into the consultation table
+         $insertConsultationQuery = "INSERT INTO medical_record (consultation_id, healthcare_id, patient_id, patient_name, medicine_id, medicine_name, quantity, time_, date_) 
+                                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         $stmtInsert = $conn->prepare($insertConsultationQuery);
+         $stmtInsert->bind_param("iissssiss", $consultation_id, $health_id, $patient_id, $patient_name, $medicine_id, $medicine_name, $quantity, $time_, $date_);
+         
+         if ($stmtInsert->execute()) {
+            echo '
+               <script type="text/javascript">
+                  alert("Record saved successfully.");
+                  window.location = "adminmedical_record.php"; 
+               </script>
+            ';
+         } else {
+            echo "Error: Could not save the record. " . $conn->error;
+         }
       } else {
-         echo "Error: " . $insertConsultationQuery . "<br>" . $conn->error;
+         echo "Error: Could not update medicine inventory. " . $conn->error;
       }
    } else {
       // Not enough medicines in stock
@@ -56,12 +90,12 @@ if ($resultMedicine && $resultMedicine->num_rows > 0) {
          alert("Error: Not enough medicines in stock.");
          window.location = "adminmedicine.php"; 
       </script>
-   ';
+      ';
       exit();
    }
 } else {
    // Medicine does not exist in the medicine table
-   echo "Error: Medicine not found.";
+   echo "Error: Medicine not found in the inventory.";
 }
 
 $conn->close();

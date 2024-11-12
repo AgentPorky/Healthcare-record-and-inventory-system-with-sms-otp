@@ -3,7 +3,7 @@ body {
     background-color: #C5D3E8;
     background-image: url('../Photos/logo.png');
     background-size: 500px; /* Adjust this value to control the size of the background image */
-    background-position: 500px 150px ;
+    background-position: 520px 100px ;
     background-repeat: no-repeat;
     height: 100vh; /* Ensure the body takes up full viewport height */
     overflow-y: hidden;
